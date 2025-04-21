@@ -15,6 +15,7 @@ const SignUp = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [form, setForm] = useState({
     name: "",
+    plateNumber: "",
     email: "",
     password: "",
   });
@@ -69,6 +70,7 @@ const SignUp = () => {
           method: "POST",
           body: JSON.stringify({
             name: form.name,
+            plate_number: form.plateNumber,
             email: form.email,
             clerkId: signUpAttempt.createdSessionId,
           }),
@@ -111,6 +113,13 @@ const SignUp = () => {
             icon={icons.person}
             value={form.name}
             onChangeText={(value) => setForm({ ...form, name: value })}
+          />
+          <InputField
+            label="Plate Number"
+            placeholder="Enter your Plate Number"
+            icon={icons.person}
+            value={form.plateNumber}
+            onChangeText={(value) => setForm({ ...form, plateNumber: value })}
           />
           <InputField
             label="Email"
