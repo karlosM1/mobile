@@ -31,6 +31,14 @@ import onboarding1 from "@/assets/images/onboarding1.png";
 import onboarding2 from "@/assets/images/onboarding2.png";
 import onboarding3 from "@/assets/images/onboarding3.png";
 import signUpCar from "@/assets/images/signup-car.png";
+import crisis from "@/assets/icons/crisis.png";
+import cloudy from "@/assets/icons/cloudy.png";
+import sun from "@/assets/icons/sun.png";
+import berk from "@/assets/icons/berk.png";
+import helmet from "@/assets/icons/helmet.png";
+import verified from "@/assets/icons/verified.png";
+import news from "@/assets/icons/news.png";
+import dmodel from "@/assets/images/3dmodel.png";
 
 export const images = {
   onboarding1,
@@ -41,9 +49,17 @@ export const images = {
   check,
   noResult,
   message,
+  dmodel,
 };
 
 export const icons = {
+  news,
+  helmet,
+  verified,
+  crisis,
+  cloudy,
+  sun,
+  berk,
   arrowDown,
   arrowUp,
   backArrow,
