@@ -4,9 +4,44 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HomePageCard from "@/app/components/HomePageCard";
 import ArrowPointer from "@/app/components/ArrowPointer";
 import { icons, images } from "@/constants";
+import { useEffect, useState } from "react";
+
+interface NewsArticle {
+  source: {
+    id: string | null;
+    name: string;
+  };
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  content: string;
+}
 
 export default function Home() {
   const { user } = useUser();
+
+  const API_KEY = "e62ca1eb9eff40a1af6a2c1e98484b26";
+
+  const [news, setNews] = useState<NewsArticle[]>([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          `https://newsapi.org/v2/everything?q=motorcycle&from=2025-03-24&sortBy=publishedAt&apiKey=${API_KEY}`
+        );
+        const data = await response.json();
+        setNews(data.articles);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   const cards = [
     {
@@ -81,8 +116,10 @@ export default function Home() {
           <View className="mx-4 mb-4">
             <View>
               <HomePageCard
-                title="News"
-                description="Stay updated with the latest news ang mga motorista sa edsa ay walang kaanoanong nag banggaan sa kadahilanang paubos na daw ang donut sa krispy kreme."
+                title="Latest Global News"
+                titleStyle="!text-red-500"
+                description={news.length > 0 ? news[0].title : "Loading..."}
+                descriptionStyle="font-bold text-lg"
                 icon={icons.news}
                 iconStyle="w-20 h-20"
                 className="bg-[#373B41] w-[100%] mb-2 h-[150px]"

@@ -6,7 +6,6 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
-import { icons } from "@/constants";
 
 interface HomePageCardProps {
   title: string;
@@ -14,6 +13,8 @@ interface HomePageCardProps {
   icon: ImageSourcePropType;
   className?: string;
   iconStyle?: string;
+  descriptionStyle?: string;
+  titleStyle?: string;
 }
 
 const HomePageCard = ({
@@ -22,14 +23,20 @@ const HomePageCard = ({
   icon,
   className,
   iconStyle,
+  descriptionStyle,
+  titleStyle,
 }: HomePageCardProps) => {
   return (
     <TouchableOpacity
       className={`flex flex-row justify-between rounded-2xl p-4 mb-4 ${className}`}
     >
       <View className="flex-1">
-        <Text className="text-white text-2xl my-3 font-bold">{title}</Text>
-        <Text className="text-white text-lg">{description}</Text>
+        <Text className={`text-white text-2xl my-3 font-bold ${titleStyle}`}>
+          {title}
+        </Text>
+        <Text className={`text-white text-lg ${descriptionStyle}`}>
+          {description}
+        </Text>
       </View>
       <View className="justify-center items-center">
         <Image
