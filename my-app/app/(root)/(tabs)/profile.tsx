@@ -7,15 +7,15 @@ import InputField from "@/app/components/InputField";
 const Profile = () => {
   const { user } = useUser();
 
-  console.log("User data:", user);
-
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-[#0E121A]">
       <ScrollView
         className="px-5"
         contentContainerStyle={{ paddingBottom: 120 }}
       >
-        <Text className="text-2xl font-JakartaBold my-5">My profile</Text>
+        <Text className="text-2xl font-JakartaBold my-5 text-[#F0F0F0]">
+          My profile
+        </Text>
 
         <View className="flex items-center justify-center my-5">
           <Image
@@ -47,11 +47,9 @@ const Profile = () => {
 
             <InputField
               label="Email"
-              placeholder={
-                user?.primaryEmailAddress?.emailAddress || "Not Found"
-              }
+              placeholder={user?.emailAddresses[0].emailAddress || "Not Found"}
               containerStyle="w-full"
-              inputStyle="p-3.5"
+              inputStyle="p-3.5 text-black"
               editable={false}
             />
 

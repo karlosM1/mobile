@@ -5,6 +5,7 @@ import HomePageCard from "@/app/components/HomePageCard";
 import ArrowPointer from "@/app/components/ArrowPointer";
 import { icons, images } from "@/constants";
 import { useEffect, useState } from "react";
+import { SignOutButton } from "@/app/components/SignOutButton";
 
 interface NewsArticle {
   source: {
@@ -78,7 +79,7 @@ export default function Home() {
     },
     {
       parts: "Rider Suit",
-      className: "absolute top-32 left-72",
+      className: "absolute top-[132px] left-[245px]",
       position: "left-[-20px] top-[4]",
     },
     {
@@ -115,7 +116,7 @@ export default function Home() {
               className="text-3xl font-semibold mb-4 ml-4"
               style={{ color: "#6e727a" }}
             >
-              Hello, {user?.emailAddresses[0].emailAddress}
+              Hello, {user?.firstName ?? "User"}
             </Text>
           </View>
 
