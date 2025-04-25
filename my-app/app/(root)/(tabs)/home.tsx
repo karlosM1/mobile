@@ -77,25 +77,31 @@ export default function Home() {
       position: "left-[-20px] top-[4]",
     },
     {
-      parts: "Leather Suit",
-      className: "absolute top-40 left-72",
+      parts: "Rider Suit",
+      className: "absolute top-32 left-72",
       position: "left-[-20px] top-[4]",
     },
     {
       parts: "Knee Armor",
-      className: "absolute top-72 left-72",
+      className: "absolute top-[250px] left-72",
       position: "left-[-20px] top-[4]",
     },
     {
       parts: "Elbow Armor",
-      className: "absolute top-28 left-2",
-      position: "left-[88px] top-[4]",
+      className: "absolute top-[106px] left-[0px]",
+      position: "left-[82px] top-[4]",
       enableBorderLeft: true,
     },
     {
       parts: "Motorcycle Gloves",
-      className: "absolute top-60 left-2",
-      position: "left-[68px] top-[-16px]",
+      className: "absolute top-[200px] left-[0px]",
+      position: "left-[76px] top-[-17px]",
+      enableBorderLeft: true,
+    },
+    {
+      parts: "Boots",
+      className: "absolute top-[326px] left-[72px]",
+      position: "left-[42px] top-[4]",
       enableBorderLeft: true,
     },
   ];
@@ -118,7 +124,7 @@ export default function Home() {
               <HomePageCard
                 title="Latest Global News"
                 titleStyle="!text-red-500"
-                description={news.length > 0 ? news[0].title : "Loading..."}
+                description=""
                 descriptionStyle="font-bold text-lg"
                 icon={icons.news}
                 iconStyle="w-20 h-20"
