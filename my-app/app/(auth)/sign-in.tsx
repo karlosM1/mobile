@@ -1,4 +1,5 @@
 import { Text, View, ScrollView, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "@/constants";
 import InputField from "../components/InputField";
 import { useState } from "react";
@@ -43,20 +44,32 @@ const SignIn = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white">
-      <View className="flex-1 bg-white">
-        <View className="relative w-full h-[250px]">
-          <Image source={images.signUpCar} className="z-0 w-full h-[250px]" />
-          <Text className="text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5">
-            Welcome 👋
-          </Text>
+    <ScrollView className="flex-1 bg-[#0E121A]">
+      <View className="flex-1 bg-[#0E121A] mb-8">
+        <View className="flex-1 px-6 pt-8">
+          {/* Header Section */}
+          <View>
+            <Text className="text-[#F0F0F0] text-[14rem] font-extrabold">
+              Log
+            </Text>
+            <Text className="text-[#F0F0F0] text-[14rem] font-extrabold mt-[-62px]">
+              in
+            </Text>
+          </View>
+          <View className="absolute top-[222px] left-[175px]">
+            <Text className="text-[#6E727A] text-3xl mt-1">
+              Happy to see you{"\n"}again. Now let's{"\n"}make memories.
+            </Text>
+          </View>
         </View>
-        <View className="p-5">
+        <View className="px-5">
           <InputField
             label="Email"
             placeholder="Enter your Email"
             icon={icons.email}
             value={form.email}
+            labelStyle="text-[#F0F0F0]"
+            placeholderTextColor="#6E727A"
             onChangeText={(value) => setForm({ ...form, email: value })}
           />
           <InputField
@@ -65,6 +78,8 @@ const SignIn = () => {
             icon={icons.lock}
             secureTextEntry={true}
             value={form.password}
+            labelStyle="text-[#F0F0F0]"
+            placeholderTextColor="#6E727A"
             onChangeText={(value) => setForm({ ...form, password: value })}
           />
 
@@ -80,7 +95,7 @@ const SignIn = () => {
             href="/sign-up"
             className="text-lg text-center text-general-200 mt-10"
           >
-            <Text>Don't have an account?</Text>
+            <Text>Don't have an account? </Text>
             <Text className="text-primary-500">Sign Up</Text>
           </Link>
         </View>

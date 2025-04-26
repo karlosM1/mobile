@@ -98,13 +98,23 @@ const SignUp = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white">
-      <View className="flex-1 bg-white">
-        <View className="relative w-full h-[250px]">
-          <Image source={images.signUpCar} className="z-0 w-full h-[250px]" />
-          <Text className="text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5">
-            Create Your Account
-          </Text>
+    <ScrollView className="flex-1 bg-[#0E121A]">
+      <View className="flex-1 bg-[#0E121A]">
+        <View className="flex-1 px-6 pt-8">
+          {/* Header Section */}
+          <View>
+            <Text className="text-[#F0F0F0] text-[13rem] font-extrabold">
+              Sign
+            </Text>
+            <Text className="text-[#F0F0F0] text-[13rem] font-extrabold mt-[-62px]">
+              up
+            </Text>
+          </View>
+          <View className="absolute top-[210px] left-[220px]">
+            <Text className="text-[#6E727A] text-2xl mt-1">
+              One Step, One{"\n"}way
+            </Text>
+          </View>
         </View>
         <View className="p-5">
           <InputField
@@ -112,6 +122,8 @@ const SignUp = () => {
             placeholder="Enter your Name"
             icon={icons.person}
             value={form.name}
+            labelStyle="text-[#F0F0F0]"
+            placeholderTextColor="#6E727A"
             onChangeText={(value) => setForm({ ...form, name: value })}
           />
           <InputField
@@ -119,6 +131,8 @@ const SignUp = () => {
             placeholder="Enter your Plate Number"
             icon={icons.person}
             value={form.plateNumber}
+            labelStyle="text-[#F0F0F0]"
+            placeholderTextColor="#6E727A"
             onChangeText={(value) => setForm({ ...form, plateNumber: value })}
           />
           <InputField
@@ -126,6 +140,8 @@ const SignUp = () => {
             placeholder="Enter your Email"
             icon={icons.email}
             value={form.email}
+            labelStyle="text-[#F0F0F0]"
+            placeholderTextColor="#6E727A"
             onChangeText={(value) => setForm({ ...form, email: value })}
           />
           <InputField
@@ -134,6 +150,8 @@ const SignUp = () => {
             icon={icons.lock}
             secureTextEntry={true}
             value={form.password}
+            labelStyle="text-[#F0F0F0]"
+            placeholderTextColor="#6E727A"
             onChangeText={(value) => setForm({ ...form, password: value })}
           />
 
@@ -149,7 +167,7 @@ const SignUp = () => {
             href="/sign-in"
             className="text-lg text-center text-general-200 mt-10"
           >
-            <Text>Already have an account?</Text>
+            <Text>Already have an account? </Text>
             <Text className="text-primary-500">Log In</Text>
           </Link>
         </View>
