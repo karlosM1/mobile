@@ -22,6 +22,7 @@ import search from "@/assets/icons/search.png";
 import selectedMarker from "@/assets/icons/selected-marker.png";
 import star from "@/assets/icons/star.png";
 import target from "@/assets/icons/target.png";
+import logout from "@/assets/icons/logout.png";
 import to from "@/assets/icons/to.png";
 import check from "@/assets/images/check.png";
 import getStarted from "@/assets/images/get-started.png";
@@ -53,6 +54,7 @@ export const images = {
 };
 
 export const icons = {
+  logout,
   news,
   helmet,
   verified,
@@ -105,7 +107,7 @@ export const onboarding = [
     id: 3,
     title: "Your ride, your way. Let's go!",
     description:
-      "Enter your destination, sit back, and let us take care of the rest.",
+      "Enter your destination, ride safe, and let us take care of the rest.",
     image: images.onboarding3,
   },
 ];

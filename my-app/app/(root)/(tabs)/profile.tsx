@@ -1,6 +1,7 @@
 import { useUser } from "@clerk/clerk-expo";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SignOutButton } from "@/app/components/SignOutButton";
 
 import InputField from "@/app/components/InputField";
 
@@ -13,7 +14,7 @@ const Profile = () => {
         className="px-5"
         contentContainerStyle={{ paddingBottom: 120 }}
       >
-        <Text className="text-2xl font-JakartaBold my-5 text-[#F0F0F0]">
+        <Text className="text-3xl font-bold my-5 text-[#F0F0F0]">
           My profile
         </Text>
 
@@ -61,6 +62,9 @@ const Profile = () => {
               editable={false}
             />
           </View>
+        </View>
+        <View className="mt-5">
+          <SignOutButton />
         </View>
       </ScrollView>
     </SafeAreaView>

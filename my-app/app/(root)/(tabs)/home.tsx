@@ -5,7 +5,6 @@ import HomePageCard from "@/app/components/HomePageCard";
 import ArrowPointer from "@/app/components/ArrowPointer";
 import { icons, images } from "@/constants";
 import { useEffect, useState } from "react";
-import { SignOutButton } from "@/app/components/SignOutButton";
 
 interface NewsArticle {
   source: {
