@@ -6,24 +6,28 @@ export const cards = [
     description: "3",
     icon: icons.crisis,
     className: "bg-[#FC574E] w-[48%] mb-2 h-[100px]",
+    destination: "/(tabs)/chat",
   },
   {
     title: "Weather",
     description: "Sunny",
     icon: icons.cloudy,
     className: "bg-blue-500 w-[48%] mb-2 h-[100px]",
+    destination: "",
   },
   {
     title: "Safety Tips",
     description: "8",
     icon: icons.helmet,
     className: "bg-[#F7C846] w-[48%] mb-2 h-[100px]",
+    destination: "",
   },
   {
     title: "Notifications",
     description: "2",
     icon: icons.berk,
     className: "bg-[#8AE98D] w-[48%] mb-2 h-[100px]",
+    destination: "/(tabs)/chat",
   },
 ];
 
