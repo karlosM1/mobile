@@ -5,6 +5,10 @@ import HomePageCard from "@/app/components/HomePageCard";
 import ArrowPointer from "@/app/components/ArrowPointer";
 import { icons, images } from "@/constants";
 import { useEffect, useState } from "react";
+import GoogleTextInput from "@/app/components/GoogleTextInput";
+import { useLocationStore } from "@/store";
+import * as Location from "expo-location";
+import { router } from "expo-router";
 
 interface NewsArticle {
   source: {
@@ -26,6 +30,8 @@ export default function Home() {
   const API_KEY = "e62ca1eb9eff40a1af6a2c1e98484b26";
 
   const [news, setNews] = useState<NewsArticle[]>([]);
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
+  const [hasPermissions, setHasPermissions] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -42,6 +48,42 @@ export default function Home() {
 
     fetchNews();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        setHasPermissions(false);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync();
+
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        // latitude: location.coords.latitude,
+        // longitude: location.coords.longitude,
+        latitude: 14.5916,
+        longitude: 120.9778,
+        address: `${address[0].name}, ${address[0].region}`,
+      });
+    })();
+  }, []);
+
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+
+    router.push("/(root)/find-ride");
+  };
 
   const cards = [
     {
@@ -94,8 +136,8 @@ export default function Home() {
     },
     {
       parts: "Motorcycle Gloves",
-      className: "absolute top-[200px] left-[0px]",
-      position: "left-[76px] top-[-17px]",
+      className: "absolute top-[210px] left-[0px]",
+      position: "left-[76px] top-[-16px]",
       enableBorderLeft: true,
     },
     {
@@ -107,68 +149,62 @@ export default function Home() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-[#0E121A]">
-      <SignedIn>
-        <ScrollView contentContainerStyle={{ paddingBottom: 64 }}>
-          <View className="mb-8 mt-4">
-            <Text
-              className="text-3xl font-semibold mb-4 ml-4"
-              style={{ color: "#6e727a" }}
-            >
-              Hello, {user?.firstName ?? "User"}
+    <SafeAreaView className="bg-[#0E121A]">
+      <ScrollView className="mb-14">
+        <View className="mb-8 mt-4">
+          <Text
+            className="text-3xl font-semibold mb-4 ml-4"
+            style={{ color: "#6e727a" }}
+          >
+            Hello, {user?.emailAddresses[0].emailAddress.split("@")[0]}{" "}
+          </Text>
+        </View>
+
+        <View className="mx-4 mb-4">
+          <View className="mb-4">
+            <GoogleTextInput
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-neutral-300"
+              handlePress={handleDestinationPress}
+            />
+          </View>
+
+          <View className="flex flex-row flex-wrap justify-between items-center mb-4">
+            {cards.map((card, index) => (
+              <HomePageCard
+                key={index}
+                title={card.title}
+                description={card.description}
+                icon={card.icon}
+                className={card.className}
+              />
+            ))}
+          </View>
+
+          <View className="mt-12">
+            <Text className="text-3xl font-extrabold ml-4 text-white text-center">
+              What Makes Up a Rider's Gear?
             </Text>
           </View>
 
-          <View className="mx-4 mb-4">
-            <View>
-              <HomePageCard
-                title="Latest Global News"
-                titleStyle="!text-red-500"
-                description=""
-                descriptionStyle="font-bold text-lg"
-                icon={icons.news}
-                iconStyle="w-20 h-20"
-                className="bg-[#373B41] w-[100%] mb-2 h-[150px]"
+          <View className="mt-8">
+            <Image
+              source={images.dmodel}
+              className="w-full h-[400px] rounded-2xl"
+              resizeMode="contain"
+            />
+            {parts.map((part, index) => (
+              <ArrowPointer
+                key={index}
+                parts={part.parts}
+                className={part.className}
+                position={part.position}
+                enableBorderLeft={part.enableBorderLeft}
               />
-            </View>
-
-            <View className="flex flex-row flex-wrap justify-between items-center mb-4">
-              {cards.map((card, index) => (
-                <HomePageCard
-                  key={index}
-                  title={card.title}
-                  description={card.description}
-                  icon={card.icon}
-                  className={card.className}
-                />
-              ))}
-            </View>
-
-            <View className="mt-12">
-              <Text className="text-3xl font-extrabold ml-4 text-white text-center">
-                What Makes Up a Rider's Gear?
-              </Text>
-            </View>
-
-            <View className="mt-8">
-              <Image
-                source={images.dmodel}
-                className="w-full h-[400px] rounded-2xl"
-                resizeMode="contain"
-              />
-              {parts.map((part, index) => (
-                <ArrowPointer
-                  key={index}
-                  parts={part.parts}
-                  className={part.className}
-                  position={part.position}
-                  enableBorderLeft={part.enableBorderLeft}
-                />
-              ))}
-            </View>
+            ))}
           </View>
-        </ScrollView>
-      </SignedIn>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

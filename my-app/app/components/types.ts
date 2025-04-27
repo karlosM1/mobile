@@ -1,4 +1,4 @@
-export interface HelmetViolation {
+export default interface HelmetViolation {
   number_plate: string;
   timestamp: string;
   isHelmet: "Helmet" | "No Helmet";
