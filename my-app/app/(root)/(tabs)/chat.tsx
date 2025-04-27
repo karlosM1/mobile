@@ -10,7 +10,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import NotificationCard from "@/app/components/NotificationCard";
-import type { HelmetViolation } from "@/app/components/types";
+import type HelmetViolation from "@/app/components/types";
 
 // Sample violation data
 const sampleViolations: (HelmetViolation & { id: string; read: boolean })[] = [

@@ -88,7 +88,7 @@ const Layout = () => (
         title: "Profile",
         headerShown: false,
         tabBarIcon: ({ focused }) => (
-          <TabIcon focused={focused} source={icons.profile} />
+          <TabIcon focused={focused} source={icons.user} />
         ),
       }}
     />

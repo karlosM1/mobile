@@ -12,6 +12,7 @@ import home from "@/assets/icons/home.png";
 import list from "@/assets/icons/list.png";
 import lock from "@/assets/icons/lock.png";
 import map from "@/assets/icons/map.png";
+import user from "@/assets/icons/user.png";
 import marker from "@/assets/icons/marker.png";
 import out from "@/assets/icons/out.png";
 import notification from "@/assets/icons/notification.png";
@@ -55,6 +56,7 @@ export const images = {
 };
 
 export const icons = {
+  user,
   notification,
   logout,
   news,

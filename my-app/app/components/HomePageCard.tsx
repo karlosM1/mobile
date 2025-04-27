@@ -6,6 +6,8 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { router } from "expo-router";
 
 interface HomePageCardProps {
   title: string;
@@ -15,6 +17,8 @@ interface HomePageCardProps {
   iconStyle?: string;
   descriptionStyle?: string;
   titleStyle?: string;
+  onPress?: () => void;
+  destination?: string;
 }
 
 const HomePageCard = ({
@@ -25,10 +29,23 @@ const HomePageCard = ({
   iconStyle,
   descriptionStyle,
   titleStyle,
+  onPress,
+  destination,
 }: HomePageCardProps) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    if (onPress) {
+      onPress();
+    } else if (destination) {
+      router.push(destination as never);
+    }
+  };
+
   return (
     <TouchableOpacity
       className={`flex flex-row justify-between rounded-2xl p-4 mb-4 ${className}`}
+      onPress={handlePress}
     >
       <View className="flex-1">
         <Text className={`text-white text-2xl my-3 font-bold ${titleStyle}`}>
