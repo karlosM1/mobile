@@ -15,7 +15,7 @@ const Rides = () => {
   const [hasPermissions, setHasPermissions] = useState(false);
 
   useEffect(() => {
-    const requestLocation = async () => {
+    (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== "granted") {
@@ -37,9 +37,7 @@ const Rides = () => {
         longitude: 120.9778,
         address: `${address[0].name}, ${address[0].region}`,
       });
-    };
-
-    requestLocation();
+    })();
   }, []);
 
   const {
@@ -59,7 +57,7 @@ const Rides = () => {
   const handleDestinationPress = () => {};
 
   return (
-    <SafeAreaView className="flex-1 bg-[#0E121A]">
+    <SafeAreaView className="bg-[#0E121A]">
       <View>
         <GoogleTextInput
           icon={icons.search}
@@ -76,7 +74,7 @@ const Rides = () => {
           initialRegion={region}
           showsUserLocation={true}
           userInterfaceStyle="dark"
-          style={{ height: 600, width: "100%" }}
+          style={{ height: 800, width: "100%" }}
         ></MapView>
       </View>
     </SafeAreaView>
