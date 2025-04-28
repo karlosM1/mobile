@@ -50,11 +50,10 @@ const Rides = () => {
   ];
 
   const handleMenuItemPress = (item: MenuItem) => {
-    // navigation.navigate('Detail', {
-    //   title: item.title,
-    //   id: item.id
-    // });
-    router.push("/(root)/(tabs)/profile");
+    router.push({
+      pathname: "/(root)/tips",
+      params: { id: item.id, title: item.title },
+    });
   };
 
   return (

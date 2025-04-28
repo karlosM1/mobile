@@ -28,27 +28,8 @@ interface NewsArticle {
 export default function Home() {
   const { user } = useUser();
 
-  const API_KEY = "e62ca1eb9eff40a1af6a2c1e98484b26";
-
-  const [news, setNews] = useState<NewsArticle[]>([]);
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const [hasPermissions, setHasPermissions] = useState(false);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/everything?q=motorcycle&from=2025-03-24&sortBy=publishedAt&apiKey=${API_KEY}`
-        );
-        const data = await response.json();
-        setNews(data.articles);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
-    };
-
-    fetchNews();
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -85,6 +66,73 @@ export default function Home() {
 
     router.push("/(root)/find-ride");
   };
+
+  const cards = [
+    {
+      title: "Violations",
+      description: "3",
+      icon: icons.crisis,
+      className: "bg-[#FC574E] w-[48%] mb-2 h-[100px]",
+      destination: "/(tabs)/chat",
+    },
+    {
+      title: "Weather",
+      description: "Sunny",
+      icon: icons.cloudy,
+      className: "bg-blue-500 w-[48%] mb-2 h-[100px]",
+      destination: "",
+    },
+    {
+      title: "Safety Tips",
+      description: "8",
+      icon: icons.helmet,
+      className: "bg-[#F7C846] w-[48%] mb-2 h-[100px]",
+      destination: "/(root)/tips",
+    },
+    {
+      title: "Notifications",
+      description: "2",
+      icon: icons.berk,
+      className: "bg-[#8AE98D] w-[48%] mb-2 h-[100px]",
+      destination: "/(tabs)/chat",
+    },
+  ];
+
+  const parts = [
+    {
+      parts: "Full Face Helmet",
+      className: "absolute top-8 left-72",
+      position: "left-[-20px] top-[4]",
+    },
+    {
+      parts: "Rider Suit",
+      className: "absolute top-[132px] left-[245px]",
+      position: "left-[-20px] top-[4]",
+    },
+    {
+      parts: "Knee Armor",
+      className: "absolute top-[250px] left-72",
+      position: "left-[-20px] top-[4]",
+    },
+    {
+      parts: "Elbow Armor",
+      className: "absolute top-[106px] left-[0px]",
+      position: "left-[82px] top-[4]",
+      enableBorderLeft: true,
+    },
+    {
+      parts: "Motorcycle Gloves",
+      className: "absolute top-[210px] left-[0px]",
+      position: "left-[76px] top-[-16px]",
+      enableBorderLeft: true,
+    },
+    {
+      parts: "Boots",
+      className: "absolute top-[326px] left-[72px]",
+      position: "left-[42px] top-[4]",
+      enableBorderLeft: true,
+    },
+  ];
 
   return (
     <SafeAreaView className="bg-[#0E121A]">
