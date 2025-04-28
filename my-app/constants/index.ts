@@ -12,6 +12,12 @@ import home from "@/assets/icons/home.png";
 import list from "@/assets/icons/list.png";
 import lock from "@/assets/icons/lock.png";
 import map from "@/assets/icons/map.png";
+import pinmap from "@/assets/icons/pinmap.png";
+import alert from "@/assets/icons/alert.png";
+import checkcurve from "@/assets/icons/checkcurve.png";
+import chevron from "@/assets/icons/chevron.png";
+import gear from "@/assets/icons/gear.png";
+import idea from "@/assets/icons/idea.png";
 import user from "@/assets/icons/user.png";
 import marker from "@/assets/icons/marker.png";
 import out from "@/assets/icons/out.png";
@@ -34,6 +40,7 @@ import onboarding1 from "@/assets/images/onboarding1.png";
 import onboarding2 from "@/assets/images/onboarding2.png";
 import onboarding3 from "@/assets/images/onboarding3.png";
 import signUpCar from "@/assets/images/signup-car.png";
+import standardhelmet from "@/assets/images/standardhelmet.png";
 import crisis from "@/assets/icons/crisis.png";
 import cloudy from "@/assets/icons/cloudy.png";
 import sun from "@/assets/icons/sun.png";
@@ -44,6 +51,7 @@ import news from "@/assets/icons/news.png";
 import dmodel from "@/assets/images/3dmodel.png";
 
 export const images = {
+  standardhelmet,
   onboarding1,
   onboarding2,
   onboarding3,
@@ -56,6 +64,12 @@ export const images = {
 };
 
 export const icons = {
+  alert,
+  checkcurve,
+  chevron,
+  gear,
+  idea,
+  pinmap,
   user,
   notification,
   logout,
