@@ -49,8 +49,42 @@ import helmet from "@/assets/icons/helmet.png";
 import verified from "@/assets/icons/verified.png";
 import news from "@/assets/icons/news.png";
 import dmodel from "@/assets/images/3dmodel.png";
+import blindspot from "@/assets/images/blind-spot.png";
+import checkbreaks from "@/assets/images/check-breaks.png";
+import checkweathercondition from "@/assets/images/check-weather-condition.png";
+import emergencycontact from "@/assets/images/emergency-contact.png";
+import firstaid from "@/assets/images/first-aid.png";
+import gloves from "@/assets/images/gloves.png";
+import helmetkey from "@/assets/images/helmet-key.png";
+import inspectbike from "@/assets/images/inspect-your-bike.png";
+import planroute from "@/assets/images/plan-your-route.png";
+import warmupbike from "@/assets/images/warm-up-engine.png";
+import basictools from "@/assets/images/basic-tools.png";
+import distance from "@/assets/images/distance.png";
+import holding from "@/assets/images/holding.png";
+import knowbasicrepair from "@/assets/images/know-basic-repair.png";
+import pants from "@/assets/images/pants.png";
+import reflective from "@/assets/images/reflective.png";
+import scanroad from "@/assets/images/scan-road.png";
 
 export const images = {
+  basictools,
+  distance,
+  holding,
+  knowbasicrepair,
+  pants,
+  reflective,
+  scanroad,
+  blindspot,
+  checkbreaks,
+  checkweathercondition,
+  emergencycontact,
+  firstaid,
+  gloves,
+  helmetkey,
+  inspectbike,
+  planroute,
+  warmupbike,
   standardhelmet,
   onboarding1,
   onboarding2,

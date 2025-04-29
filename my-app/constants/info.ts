@@ -1,4 +1,4 @@
-import { icons } from ".";
+import { icons, images } from ".";
 
 export const cards = [
   {
@@ -64,5 +64,23 @@ export const parts = [
     className: "absolute top-[326px] left-[72px]",
     position: "left-[42px] top-[4]",
     enableBorderLeft: true,
+  },
+];
+
+export const safety = [
+  {
+    title: "Always Wear a Helmet",
+    description: "aadsadsdasd",
+    image: images.standardhelmet,
+  },
+  {
+    title: "Follow Traffic Rules",
+    description: "Always follow the traffic rules for safety.",
+    image: images.dmodel,
+  },
+  {
+    title: "Check Your Bike",
+    description: "Ensure your bike is in good condition before riding.",
+    image: images.dmodel,
   },
 ];

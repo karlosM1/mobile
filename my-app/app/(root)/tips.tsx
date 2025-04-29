@@ -63,24 +63,18 @@ const contentData: Record<
         title: "Maintain Safe Distance",
         description:
           "Keep at least 3-4 seconds following distance from vehicles ahead.",
-        image: images.checkbreaks,
+        image: images.distance,
       },
       {
         title: "Scan the Road Ahead",
         description:
           "Look 12-15 seconds ahead to anticipate hazards and changes.",
-        image: images.checkbreaks,
+        image: images.scanroad,
       },
       {
         title: "Use Both Brakes",
         description:
           "Apply front and rear brakes simultaneously for maximum stopping power.",
-        image: images.checkbreaks,
-      },
-      {
-        title: "Stay Visible",
-        description:
-          "Position yourself where drivers can see you in their mirrors.",
         image: images.checkbreaks,
       },
       {
@@ -109,7 +103,7 @@ const contentData: Record<
       {
         title: "Riding Pants",
         description: "Use reinforced pants with knee and hip protection.",
-        image: images.checkbreaks,
+        image: images.pants,
       },
       {
         title: "Proper Footwear",
@@ -123,15 +117,9 @@ const contentData: Record<
         image: images.gloves,
       },
       {
-        title: "Layer Smartly",
-        description:
-          "Use weather-appropriate, breathable, or waterproof layers.",
-        image: images.checkbreaks,
-      },
-      {
         title: "Visibility Matters",
         description: "Add reflective strips to your gear for nighttime riding.",
-        image: images.checkbreaks,
+        image: images.reflective,
       },
     ],
     buttonText: "Shop Gear Options",
@@ -153,12 +141,12 @@ const contentData: Record<
         title: "Basic Tool Kit",
         description:
           "Pack essential tools for roadside repairs and adjustments.",
-        image: images.checkbreaks,
+        image: images.basictools,
       },
       {
         title: "Know Basic Repairs",
         description: "Learn to fix flat tires and other common issues.",
-        image: images.checkbreaks,
+        image: images.knowbasicrepair,
       },
       {
         title: "Roadside Assistance",
@@ -187,7 +175,7 @@ const contentData: Record<
         title: "Holding Position",
         description:
           "Passengers should hold your waist or grab rails, not shoulders.",
-        image: images.checkbreaks,
+        image: images.holding,
       },
       {
         title: "Leaning Technique",
@@ -269,7 +257,7 @@ export default function DetailScreen() {
             <Image
               source={icon.back}
               resizeMode="contain"
-              style={{ width: 24, height: 24 }}
+              style={{ width: 24, height: 24, tintColor: "white" }}
             />
             <Text className="text-[#3B82F6] text-lg font-medium ml-1">
               Back
