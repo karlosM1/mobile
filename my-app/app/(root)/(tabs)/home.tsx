@@ -87,7 +87,7 @@ export default function Home() {
       description: "8",
       icon: icons.helmet,
       className: "bg-[#F7C846] w-[48%] mb-2 h-[100px]",
-      destination: "/(root)/tips",
+      destination: "/(tabs)/rides",
     },
     {
       title: "Notifications",
@@ -138,7 +138,7 @@ export default function Home() {
     <SafeAreaView className="bg-[#0E121A]">
       <View className="mb-8 mt-4">
         <Text
-          className="text-3xl font-semibold mb-4 ml-4"
+          className="text-3xl font-semibold ml-4"
           style={{ color: "#6e727a" }}
         >
           Hello, {user?.emailAddresses[0].emailAddress.split("@")[0]}{" "}
@@ -167,7 +167,7 @@ export default function Home() {
           ))}
         </View>
 
-        <View className="mt-12">
+        <View className="">
           <Text className="text-3xl font-extrabold ml-4 text-white text-center">
             What Makes Up a Rider's Gear?
           </Text>

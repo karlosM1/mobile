@@ -7,14 +7,12 @@ import {
   Image,
   FlatList,
   Dimensions,
-  ImageBackground,
   ImageSourcePropType,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { router, useLocalSearchParams } from "expo-router";
-import { images } from "@/constants";
+import { icons, images } from "@/constants";
 
-// Define content for each menu item
 const contentData: Record<
   string,
   {
@@ -88,7 +86,7 @@ const contentData: Record<
       {
         title: "Avoid Blind Spots",
         description: "Don't linger in areas where drivers might not see you.",
-        image: images.checkbreaks,
+        image: images.blindspot,
       },
     ],
     buttonText: "Review Riding Techniques",
@@ -100,7 +98,7 @@ const contentData: Record<
         title: "Helmet Fit is Key",
         description:
           "Choose a helmet that fits snugly and is properly fastened.",
-        image: images.checkbreaks,
+        image: images.helmetkey,
       },
       {
         title: "Wear Abrasion-Resistant Clothing",
@@ -122,7 +120,7 @@ const contentData: Record<
         title: "Gloves",
         description:
           "Select gloves with knuckle protection and palm reinforcement.",
-        image: images.checkbreaks,
+        image: images.gloves,
       },
       {
         title: "Layer Smartly",
@@ -144,12 +142,12 @@ const contentData: Record<
       {
         title: "Carry a First Aid Kit",
         description: "Include bandages, antiseptic wipes, and pain relievers.",
-        image: images.checkbreaks,
+        image: images.firstaid,
       },
       {
         title: "Emergency Contacts",
         description: "Store ICE (In Case of Emergency) contacts in your phone.",
-        image: images.checkbreaks,
+        image: images.emergencycontact,
       },
       {
         title: "Basic Tool Kit",
@@ -208,8 +206,8 @@ const contentData: Record<
 };
 
 // Icons for the header
-const icons = {
-  back: { uri: "/placeholder.svg?height=24&width=24" },
+const icon = {
+  back: icons.backArrow,
   share: { uri: "/placeholder.svg?height=22&width=22" },
   bookmark: { uri: "/placeholder.svg?height=22&width=22" },
 };
@@ -222,8 +220,6 @@ export default function DetailScreen() {
   const id = params.id as string;
 
   const content = contentData[id] || {
-    title: "Content Not Found",
-    backgroundImage: "/placeholder.svg?height=800&width=400",
     items: [],
     buttonText: "Go Back",
   };
@@ -232,15 +228,24 @@ export default function DetailScreen() {
     item,
     index,
   }: {
-    item: { title: string; description: string };
+    item: { title: string; description: string; image: ImageSourcePropType };
     index: number;
   }) => (
     <View
       style={{ width: width - 48 }}
-      className="bg-[#0E121A] rounded-xl p-6 mr-4"
+      className="bg-[#0E121A] rounded-xl p-2 mr-4"
     >
-      <Text className="text-white text-xl font-bold mb-3">{item.title}</Text>
-      <Text className="text-gray-300 text-base">{item.description}</Text>
+      <View className="flex-1 items-center justify-center">
+        <Image
+          source={item.image}
+          resizeMode="contain"
+          className="w-[380px] h-[380px] items-center"
+        />
+      </View>
+      <View className="px-4 py-2">
+        <Text className="text-white text-xl font-bold mb-3">{item.title}</Text>
+        <Text className="text-gray-300 text-base">{item.description}</Text>
+      </View>
     </View>
   );
 
@@ -262,7 +267,7 @@ export default function DetailScreen() {
             className="flex-row items-center"
           >
             <Image
-              source={icons.back}
+              source={icon.back}
               resizeMode="contain"
               style={{ width: 24, height: 24 }}
             />
@@ -272,20 +277,20 @@ export default function DetailScreen() {
           </TouchableOpacity>
 
           <Text className="text-white text-lg font-semibold">
-            Setup Checklist
+            {content.items[currentIndex].title}
           </Text>
 
           <View className="flex-row">
             <TouchableOpacity className="px-2">
               <Image
-                source={icons.share}
+                source={icon.share}
                 resizeMode="contain"
                 style={{ width: 22, height: 22 }}
               />
             </TouchableOpacity>
             <TouchableOpacity className="px-2 ml-2">
               <Image
-                source={icons.bookmark}
+                source={icon.bookmark}
                 resizeMode="contain"
                 style={{ width: 22, height: 22 }}
               />
@@ -295,15 +300,8 @@ export default function DetailScreen() {
 
         {/* Content */}
         <View className="flex-1">
-          {/* Title Section */}
-          <View className="px-6 py-10">
-            <Text className="text-white text-3xl font-bold">
-              {content.title}
-            </Text>
-          </View>
-
           {/* Horizontal FlatList */}
-          <View className="px-6 flex-1">
+          <View className="px-2 flex-1">
             <FlatList
               data={content.items}
               renderItem={renderItem}
