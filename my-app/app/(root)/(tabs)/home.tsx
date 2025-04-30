@@ -9,21 +9,7 @@ import GoogleTextInput from "@/app/components/GoogleTextInput";
 import { useLocationStore } from "@/store";
 import * as Location from "expo-location";
 import { router } from "expo-router";
-import { parts, cards } from "@/constants/info";
-
-interface NewsArticle {
-  source: {
-    id: string | null;
-    name: string;
-  };
-  author: string;
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string;
-  publishedAt: string;
-  content: string;
-}
+import Cards from "@/app/components/Cards";
 
 export default function Home() {
   const { user } = useUser();

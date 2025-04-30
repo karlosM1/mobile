@@ -196,8 +196,8 @@ const contentData: Record<
 // Icons for the header
 const icon = {
   back: icons.backArrow,
-  share: { uri: "/placeholder.svg?height=22&width=22" },
-  bookmark: { uri: "/placeholder.svg?height=22&width=22" },
+  share: icons.share,
+  bookmark: icons.bookmark,
 };
 
 const { width } = Dimensions.get("window");
@@ -273,14 +273,14 @@ export default function DetailScreen() {
               <Image
                 source={icon.share}
                 resizeMode="contain"
-                style={{ width: 22, height: 22 }}
+                style={{ width: 22, height: 22, tintColor: "white" }}
               />
             </TouchableOpacity>
             <TouchableOpacity className="px-2 ml-2">
               <Image
                 source={icon.bookmark}
                 resizeMode="contain"
-                style={{ width: 22, height: 22 }}
+                style={{ width: 22, height: 22, tintColor: "white" }}
               />
             </TouchableOpacity>
           </View>

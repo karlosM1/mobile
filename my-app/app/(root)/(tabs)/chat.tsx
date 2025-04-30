@@ -11,6 +11,9 @@ import {
 } from "react-native";
 import NotificationCard from "@/app/components/NotificationCard";
 import type HelmetViolation from "@/app/components/types";
+import { useFetch } from "@/lib/fetch";
+import { ViolationProps } from "@/types/type";
+import { useUser } from "@clerk/clerk-expo";
 
 // Sample violation data
 const sampleViolations: (HelmetViolation & { id: string; read: boolean })[] = [
@@ -51,8 +54,14 @@ const sampleViolations: (HelmetViolation & { id: string; read: boolean })[] = [
 type FilterType = "all" | "unread" | "violations";
 
 const NotificationTab: React.FC = () => {
+  const { user } = useUser();
+
   const [notifications, setNotifications] = useState(sampleViolations);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+
+  // const { data: fetchedNotifications } = useFetch<ViolationProps[]>(
+  //   `/(api)/${user?.plate_number}`,
+  // )
 
   const markAsRead = (id: string) => {
     setNotifications((prev) =>

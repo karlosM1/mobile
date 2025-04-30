@@ -70,7 +70,7 @@ const Rides = () => {
           <Image
             source={icons.search}
             resizeMode="contain"
-            style={{ width: 20, height: 20 }}
+            style={{ width: 20, height: 20, tintColor: "white" }}
           />
           <TextInput
             className="flex-1 text-white ml-2 h-10"
@@ -101,7 +101,7 @@ const Rides = () => {
               <Image
                 source={icons.chevron}
                 resizeMode="contain"
-                style={{ width: 18, height: 16 }}
+                style={{ width: 18, height: 16, tintColor: "white" }}
               />
             </TouchableOpacity>
           ))}
