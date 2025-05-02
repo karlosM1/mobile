@@ -137,3 +137,12 @@ declare interface DriverCardProps {
   selected: number;
   setSelected: () => void;
 }
+
+declare interface ViolationProps {
+  id: string;
+  plate_number: string;
+  violation_type: string;
+  detected_at: string;
+  image_url: string;
+  is_notified: boolean;
+}

@@ -1,9 +1,9 @@
 import type React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import type { HelmetViolation } from "./types";
+import { ViolationProps } from "@/types/type";
 
 interface NotificationCardProps {
-  violation: HelmetViolation;
+  violation: ViolationProps;
   onPress: () => void;
   read: boolean;
 }
@@ -41,7 +41,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
   onPress,
   read,
 }) => {
-  const isNoHelmet = violation.isHelmet === "No Helmet";
+  const isNoHelmet = violation.violation_type === "No Helmet";
 
   return (
     <TouchableOpacity
@@ -72,26 +72,26 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
             {isNoHelmet ? "Helmet Violation" : "Helmet Compliance"}
           </Text>
           <Text className="text-xs text-gray-500">
-            {formatTimeAgo(violation.timestamp)}
+            {formatTimeAgo(violation.detected_at)}
           </Text>
         </View>
 
         <Text className="text-sm text-gray-600 mb-2">
-          Vehicle {violation.number_plate} detected with{" "}
-          {violation.isHelmet.toLowerCase()}.
+          Vehicle {violation.plate_number} detected with{" "}
+          {violation.violation_type.toLowerCase()}.
         </Text>
 
         <View className="flex-row justify-between items-center">
           <View className="bg-gray-100 px-2 py-1 rounded">
             <Text className="text-xs text-gray-600">
-              {violation.number_plate}
+              {violation.plate_number}
             </Text>
           </View>
         </View>
 
-        {violation.cropped_image ? (
+        {violation.image_url ? (
           <Image
-            source={{ uri: violation.cropped_image }}
+            source={{ uri: violation.image_url }}
             className="w-full h-24 rounded-md mt-3 bg-gray-200"
           />
         ) : (

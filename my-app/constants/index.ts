@@ -11,6 +11,8 @@ import google from "@/assets/icons/google.png";
 import home from "@/assets/icons/home.png";
 import list from "@/assets/icons/list.png";
 import lock from "@/assets/icons/lock.png";
+import share from "@/assets/icons/share-square.png";
+import bookmark from "@/assets/icons/bookmark.png";
 import map from "@/assets/icons/map.png";
 import pinmap from "@/assets/icons/pinmap.png";
 import alert from "@/assets/icons/alert.png";
@@ -98,6 +100,8 @@ export const images = {
 };
 
 export const icons = {
+  share,
+  bookmark,
   alert,
   checkcurve,
   chevron,

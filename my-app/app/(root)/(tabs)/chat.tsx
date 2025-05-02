@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,40 +14,43 @@ import type HelmetViolation from "@/app/components/types";
 import { useFetch } from "@/lib/fetch";
 import { ViolationProps } from "@/types/type";
 import { useUser } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/clerk-expo";
+import { clerk } from "@clerk/clerk-expo/dist/provider/singleton";
 
 // Sample violation data
-const sampleViolations: (HelmetViolation & { id: string; read: boolean })[] = [
+const sampleViolations: ViolationProps[] = [
   {
     id: "1",
-    number_plate: "ABC123",
-    timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 minutes ago
-    isHelmet: "No Helmet",
-    cropped_image: "",
-    read: false,
+    plate_number: "ABC123",
+    violation_type: "No Helmet",
+    detected_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 minutes ago
+    image_url: "",
+    is_notified: false,
   },
   {
     id: "2",
-    number_plate: "XYZ789",
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
-    isHelmet: "No Helmet",
-    cropped_image: "",
-    read: true,
+    plate_number: "XYZ789",
+    violation_type: "No Helmet",
+    detected_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
+    image_url: "",
+    is_notified: true,
   },
   {
     id: "3",
-    number_plate: "DEF456",
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), // 5 hours ago
-    isHelmet: "Helmet",
-    cropped_image: "",
-    read: false,
+    plate_number: "DEF456",
+    violation_type: "Helmet",
+    detected_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), // 5 hours ago
+
+    image_url: "",
+    is_notified: false,
   },
   {
     id: "4",
-    number_plate: "GHI789",
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1 day ago
-    isHelmet: "No Helmet",
-    cropped_image: "",
-    read: true,
+    plate_number: "GHI789",
+    violation_type: "No Helmet",
+    detected_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1 day ago
+    image_url: "",
+    is_notified: true,
   },
 ];
 
@@ -55,13 +58,37 @@ type FilterType = "all" | "unread" | "violations";
 
 const NotificationTab: React.FC = () => {
   const { user } = useUser();
+  const userEmail = user?.emailAddresses[0].emailAddress; // Log the user ID to check if it's available
 
-  const [notifications, setNotifications] = useState(sampleViolations);
+  const [notifications, setNotifications] = useState<ViolationProps[]>([]);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // const { data: fetchedNotifications } = useFetch<ViolationProps[]>(
-  //   `/(api)/${user?.plate_number}`,
-  // )
+  useEffect(() => {
+    if (userEmail) {
+      const fetchViolations = async () => {
+        try {
+          setLoading(true);
+          // Use email in the request URL
+          const response = await fetch(
+            `http://127.0.0.1:8000/mobile/userviolation/${userEmail}`
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch violations");
+          }
+          const data = await response.json();
+          setNotifications(data.violations);
+        } catch (err) {
+          setError("Failed to load violations");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchViolations();
+    }
+  }, [userEmail]);
 
   const markAsRead = (id: string) => {
     setNotifications((prev) =>
@@ -72,15 +99,15 @@ const NotificationTab: React.FC = () => {
   };
 
   const filteredNotifications = notifications.filter((notification) => {
-    if (activeFilter === "unread") return !notification.read;
+    if (activeFilter === "unread") return !notification.is_notified;
     if (activeFilter === "violations")
-      return notification.isHelmet === "No Helmet";
+      return notification.violation_type === "No Helmet";
     return true;
   });
 
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.is_notified).length;
   const violationCount = notifications.filter(
-    (n) => n.isHelmet === "No Helmet"
+    (n) => n.violation_type === "No Helmet"
   ).length;
 
   return (
@@ -156,7 +183,19 @@ const NotificationTab: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      {filteredNotifications.length > 0 ? (
+      {loading ? (
+        <View className="flex-1 justify-center items-center px-6">
+          <Text className="mt-4 text-base text-gray-500 text-center">
+            Loading...
+          </Text>
+        </View>
+      ) : error ? (
+        <View className="flex-1 justify-center items-center px-6">
+          <Text className="mt-4 text-base text-red-500 text-center">
+            {error}
+          </Text>
+        </View>
+      ) : filteredNotifications.length > 0 ? (
         <FlatList
           data={filteredNotifications}
           keyExtractor={(item) => item.id}
@@ -164,7 +203,7 @@ const NotificationTab: React.FC = () => {
             <NotificationCard
               violation={item}
               onPress={() => markAsRead(item.id)}
-              read={item.read}
+              read={item.is_notified}
             />
           )}
           contentContainerClassName="px-4 py-2"
@@ -172,7 +211,6 @@ const NotificationTab: React.FC = () => {
         />
       ) : (
         <View className="flex-1 justify-center items-center px-6">
-          {/* <Bell width={50} height={50} color="#d1d5db" /> */}
           <Text className="mt-4 text-base text-gray-500 text-center">
             No notifications to display
           </Text>
